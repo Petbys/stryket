@@ -7,12 +7,17 @@ def get_stryket_api():
     stryket_data = requests.get(url=api_url).json()
     home_team = []
     away_team = []
+    home_team_last =[]
+    away_team_last =[]
     try:
         for i in match_id:
             home_team.append(stryket_data['draws'][0]['drawEvents'][i]['match']['participants'][0]['name'])
             away_team.append(stryket_data['draws'][0]['drawEvents'][i]['match']['participants'][1]['name'])
+            home_team_last.append(stryket_data['draws'][0]['drawEvents'][i]['match']['participants'][0]['latest'])
+            away_team_last.append(stryket_data['draws'][0]['drawEvents'][i]['match']['participants'][1]['latest'])
     except:
         print('Something went wrong')
 
-    return home_team, away_team
-        
+    return home_team, away_team, home_team_last, away_team_last
+
+print(get_stryket_api())
